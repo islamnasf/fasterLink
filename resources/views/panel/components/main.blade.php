@@ -1,0 +1,5 @@
+@include('panel.components.header')
+@include('panel.components.navbar')
+@include('panel.components.sidebar')
+@yield('content')
+@include('panel.components.footer')

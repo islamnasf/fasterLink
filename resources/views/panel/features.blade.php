@@ -1,0 +1,2 @@
+@extends('panel.components.main')
+
