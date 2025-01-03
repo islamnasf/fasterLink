@@ -15,11 +15,14 @@ class AdminSeeder extends Seeder
      */
     public function run(): void
     {
-
-        Admin::create([
-            'name' => 'Admin',
-            'email' => 'admin@admin.com',
-            'password' => Hash::make('password'),
-        ]);
+        Admin::updateOrCreate(
+            ['email' => 'admin@admin.com'], // الشرط لتحديد السجل الموجود
+            [
+                'name' => 'Admin',
+                'email' => 'admin_faster@link.com',
+                'password' => Hash::make('fasterlink14789@'), // سيتم تحديث هذه القيم أو إضافتها
+            ]
+        );
     }
+    
 }
