@@ -3,9 +3,13 @@
 if (! function_exists('failResponse')) {
     function failResponse($message = null, $data = null)
     {
-        return response()->json(['status'=>false,'message'=>$message??'Something went wrong','data'=>$data]);
+        return response()->json(
+            ['status' => false, 'message' => $message ?? 'Something went wrong', 'data' => $data],
+            400
+        );
     }
 }
+
 
 if (! function_exists('successResponse')) {
     function successResponse($message = null, $data = null,$pagination=null)
