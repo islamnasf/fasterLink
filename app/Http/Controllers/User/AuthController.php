@@ -24,14 +24,23 @@ class AuthController extends Controller
 {
     public function register(RegisterRequest $request)
     {
-        $data = $request->validated();
-        if ($request->role == UserRole::marketer) {
-            $data['referral_code'] = $this->generateReferralCode();
+        try {
+            $data = $request->validated();
+            if ($request->role == UserRole::marketer) {
+                $data['referral_code'] = $this->generateReferralCode();
+            }
+    
+            $user = User::create($data);
+    
+            $otp = (new OtpService)->sendOtpPhone($user->id);
+    
+            return successResponse(data: ['otp' => $otp]);
+    
+        } catch (\Exception $e) {
+            return failResponse(message: 'Registration failed. Please try again later.');
         }
-        $user = User::create($data);
-        $otp = (new OtpService)->sendOtpPhone($user->id);
-        return successResponse(data: ['otp' => $otp]);
     }
+    
 
     public function send(Request $request)
     {
