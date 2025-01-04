@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Panel;
+namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Services\NotificationService;
@@ -14,6 +14,7 @@ use App\Models\Wallet;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
+
 class StoreController extends Controller
 {
 
@@ -26,6 +27,29 @@ class StoreController extends Controller
         $stores = $stores->withAvg('ratings', 'rating')->orderBy('created_at', 'desc')->get();
         return view('panel.stores', compact('stores'));
     }
+
+    public function update(Request $request, $id)
+    {
+        $store = Store::findOrFail($id);
+    
+        $request->validate([
+            'brand_name' => 'required|string|max:255',
+            'logo' => 'nullable|image|max:2048',
+            'category_id' => 'required|exists:categories,id',
+        ]);
+    
+        $data = $request->only('brand_name', 'category_id');
+        if ($request->hasFile('logo')) {
+            ImageService::delete($store->logo);
+            $data['logo'] = ImageService::upload($request->file('logo'));
+        }
+    
+        $store->update($data);
+    
+        return back()->with('message', 'Store updated successfully.');
+    }
+
+
 
     public function details($id)
     {

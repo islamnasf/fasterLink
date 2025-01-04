@@ -36,7 +36,9 @@ class SubscriptionController extends Controller
             'country_id' => $request->country_id,
             'package_id' => $package->id,
             'multi_branches' => $request->multi_branches,
-            'subtotal' => ($request->multi_branches) ? $package->multi_branches_price : $package->basic_price,
+            // 'subtotal' => ($request->multi_branches) ? $package->multi_branches_price : $package->basic_price,
+            'subtotal' => $request->subtotal,
+
             'discount' => '100',
             'grand_total' => '0.00',
             'payment_status' => 1,

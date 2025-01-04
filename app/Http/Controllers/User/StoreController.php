@@ -42,7 +42,7 @@ class StoreController extends Controller
             $data['cover_images'] = ImageService::saveArray($request, 'stores/covers', 'cover_images');
         }
         Store::create($data);
-        return successResponse();
+        return successResponse(data:$data);
     }
 
     public function update(StoreRequest $request,$id)

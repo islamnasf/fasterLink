@@ -10,14 +10,18 @@ class PackageController extends Controller
 {
     public function get()
     {
-        $packages = Package::all();
-        return successResponse(data:PackageCollection::collection($packages));
+        $packages = Package::with(['packageCurrencies.currency','elements'])->get();
+        // return successResponse(data:PackageCollection::collection($packages));
+        return successResponse(data:$packages);
+
     }
 
     public function index()
     {
-        $packages = Package::all();
-        return successResponse(data:PackageCollection::collection($packages));
+        $packages = Package::with(['packageCurrencies.currency','elements'])->get();
+        // return successResponse(data:PackageCollection::collection($packages));
+        return successResponse(data:$packages);
+
     }
 
 }

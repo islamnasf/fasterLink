@@ -115,4 +115,9 @@ class Store extends Model
     {
         return $this->hasMany(Branch::class);
     }
+    public function ratings()
+{
+    return $this->hasMany(Rating::class, 'store_id');
+}
+
 }

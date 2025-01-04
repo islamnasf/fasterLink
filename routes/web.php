@@ -9,6 +9,7 @@ use App\Http\Controllers\Admin\CurrencyController;
 use App\Http\Controllers\Admin\ElementController;
 use App\Http\Controllers\Admin\PackageController;
 use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Admin\StoreController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -100,5 +101,17 @@ Route::group(['prefix' => 'elements', 'as' => 'elements.'], function () {
     Route::delete('/delete/{id}', [ElementController::class, 'delete'])->name('delete');
 
 });
+Route::group(['prefix' => 'stores', 'as' => 'stores.'], function () {
+    Route::get('/', [StoreController::class, 'index'])->name('index');
+    // Route::get('create', [StoreController::class, 'create'])->name('create');
+    // Route::post('store', [StoreController::class, 'store'])->name('store');
+    Route::get('{id}/details', [StoreController::class, 'details'])->name('details');
+    Route::get('{id}/branches', [StoreController::class, 'branches'])->name('branches');
+    Route::get('{id}/departments', [StoreController::class, 'departments'])->name('departments');
+    Route::post('{id}/status', [StoreController::class, 'status'])->name('status');
+    Route::put('{id}', [StoreController::class, 'update'])->name('update');
+    Route::delete('{id}', [StoreController::class, 'delete'])->name('delete');
+});
+
 });
 

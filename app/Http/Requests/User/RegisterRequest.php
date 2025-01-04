@@ -23,6 +23,8 @@ class RegisterRequest extends FormRequest
             'password' => 'required|confirmed',
             'role' => 'required|in:store,mall,marketer',
             'referral_code' => 'sometimes',
+            'country_id' => 'required',
+
         ];
     }
 
