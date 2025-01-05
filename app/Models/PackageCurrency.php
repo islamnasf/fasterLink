@@ -28,6 +28,6 @@ class PackageCurrency extends Model
      */
     public function currency()
     {
-        return $this->belongsTo(currency::class);
+        return $this->belongsTo(Currency::class);
     }
 }
