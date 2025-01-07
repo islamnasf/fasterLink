@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('address_ar')->nullable();
             $table->boolean('is_main')->default(0);
             $table->foreignId('user_id')->on('users');
+            $table->foreignId('store_id')->on('stores');
             $table->timestamps();
         });
     }

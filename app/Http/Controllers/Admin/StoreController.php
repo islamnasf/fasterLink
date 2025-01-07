@@ -7,6 +7,7 @@ use App\Http\Services\NotificationService;
 use App\Http\Shared\ImageService;
 use App\Http\Shared\NotificationTopic;
 use App\Http\Shared\NotificationType;
+use App\Models\Department;
 use App\Models\Invoice;
 use App\Models\Reward;
 use App\Models\Store;
@@ -116,5 +117,12 @@ class StoreController extends Controller
         $store = Store::findOrFail($id);
         $departments = $store->departments;
         return view('panel.departments', compact('departments'));
+    }
+    public function departmentDelete($id)
+    {
+        $department = Department::findOrFail($id);
+        $department->delete();
+    
+        return redirect()->back()->with('success', 'Department deleted successfully.');
     }
 }

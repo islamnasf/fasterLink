@@ -33,7 +33,7 @@
           </div><!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="{{route('panel.stores.index')}}">Stores</a></li>
+              <li class="breadcrumb-item"><a href="{{route('admin.stores.index')}}">Stores</a></li>
               <li class="breadcrumb-item active">Departments</li>
             </ol>
           </div><!-- /.col -->
@@ -55,7 +55,7 @@
             <!-- create modal -->
             {{-- <div class="modal fade" id="modal-create">
               <div class="modal-dialog">
-                <form action="{{route('panel.stores.store')}}" method="POST" enctype="multipart/form-data">
+                <form action="{{route('admin.stores.store')}}" method="POST" enctype="multipart/form-data">
                   @csrf
                 <div class="modal-content">
                   <div class="modal-header">
@@ -100,20 +100,20 @@
               <thead>
               <tr>
                 <th>Name</th>
-                <th>Images</th>
+                <!-- <th>Images</th> -->
                 <th>Actions</th>
               </tr>
               </thead>
               <tbody>
                 @foreach ($departments as $department)
                 <tr>
-                <td>{{$department->name}}</td>
-                <td>
+                <td>{{$department->name_en}}  /  {{$department->name_ar}}</td>
+                <!-- <td>
                 @if ($department->images)
                 @foreach ($department->images as $image)
                 @if ($image)<img src="{{url($image)}}" class="img-circle" width="50px" height="50px">@endif
                 @endforeach
-                @endif
+                @endif -->
               </td>
                 <td>
                   {{-- <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#modal-edit{{$store->id}}">
@@ -122,7 +122,7 @@
                   <!-- edit modal -->
                   <div class="modal fade" id="modal-edit{{$store->id}}">
                     <div class="modal-dialog">
-                      <form action="{{route('panel.stores.update',$store->id)}}" method="POST" enctype="multipart/form-data">
+                      <form action="{{route('admin.stores.update',$store->id)}}" method="POST" enctype="multipart/form-data">
                         @method('PUT')
                         @csrf
                       <div class="modal-content">
@@ -160,18 +160,18 @@
                     <!-- /.modal-dialog -->
                   </div> --}}
                   <!-- /.modal -->
-                  {{-- <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modal-delete{{$store->id}}">
+                   <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modal-delete{{$department->id}}">
                     Delete
-                  </button> --}}
+                  </button> 
                   <!-- edit modal -->
-                  {{-- <div class="modal fade" id="modal-delete{{$store->id}}">
+                   <div class="modal fade" id="modal-delete{{$department->id}}">
                     <div class="modal-dialog">
-                      <form action="{{route('panel.stores.delete',$store->id)}}" method="POST">
+                      <form action="{{route('admin.stores.departments.delete',$department->id)}}" method="POST">
                         @method('DELETE')
                         @csrf
                       <div class="modal-content">
                         <div class="modal-header">
-                          <h4 class="modal-title">Delete Branch</h4>
+                          <h4 class="modal-title">Delete Department</h4>
                           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                           </button>
@@ -188,7 +188,7 @@
                       <!-- /.modal-content -->
                     </div>
                     <!-- /.modal-dialog -->
-                  </div> --}}
+                  </div> 
                   <!-- /.modal -->
                 </td>
               </tr>
@@ -219,8 +219,8 @@
 
     $('#data-table').DataTable({
       "paging": true,
-      "lengthChange": false,
-      "searching": false,
+      "lengthChange": true,
+      "searching": true,
       "ordering": false,
       "info": true,
       "autoWidth": false,

@@ -18,6 +18,8 @@ class Branch extends Model
         'address_ar',
         'is_main',
         'user_id',
+        'store_id',
+
     ];
       
     public function city()
@@ -28,5 +30,13 @@ class Branch extends Model
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+    public function store()
+    {
+        return $this->belongsTo(Store::class);
+    }
+    public function numbers()
+    {
+        return $this->hasMany(BranchNumber::class);
     }
 }

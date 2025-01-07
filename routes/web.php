@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\BranchController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Admin\PanelController;
 use App\Http\Controllers\Admin\SettingController;
@@ -101,6 +102,7 @@ Route::group(['prefix' => 'elements', 'as' => 'elements.'], function () {
     Route::delete('/delete/{id}', [ElementController::class, 'delete'])->name('delete');
 
 });
+//stores
 Route::group(['prefix' => 'stores', 'as' => 'stores.'], function () {
     Route::get('/', [StoreController::class, 'index'])->name('index');
     // Route::get('create', [StoreController::class, 'create'])->name('create');
@@ -111,6 +113,15 @@ Route::group(['prefix' => 'stores', 'as' => 'stores.'], function () {
     Route::post('{id}/status', [StoreController::class, 'status'])->name('status');
     Route::put('{id}', [StoreController::class, 'update'])->name('update');
     Route::delete('{id}', [StoreController::class, 'delete'])->name('delete');
+    Route::delete('department/{id}', [StoreController::class, 'departmentDelete'])->name('departments.delete');
+});
+//branches
+Route::group(['prefix' => 'branches', 'as' => 'branches.'], function () {
+    Route::get('/', [BranchController::class, 'index'])->name('index');
+    Route::delete('/delete/{id}', [BranchController::class, 'delete'])->name('delete');
+    Route::delete('number/delete/{id}', [BranchController::class, 'numberDelete'])->name('number.delete');
+
+
 });
 
 });

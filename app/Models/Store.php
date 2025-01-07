@@ -119,5 +119,9 @@ class Store extends Model
 {
     return $this->hasMany(Rating::class, 'store_id');
 }
+public function departments()
+{
+    return $this->hasMany(Department::class, 'store_id');
+}
 
 }

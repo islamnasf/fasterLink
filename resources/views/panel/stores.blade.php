@@ -64,6 +64,7 @@
               <thead>
               <tr>
                 <th>Brand Name</th>
+                <th>Owner</th>
                 <th>Logo</th>
                 <th>Category</th>
                 <th>Rating</th>
@@ -75,7 +76,9 @@
               <tbody>
                 @foreach ($stores as $store)
                 <tr>
-                <td>{{$store->name_en}}-{{$store->name_ar}}</td>
+                <!-- <td>{{$store->name_en}}-{{$store->name_ar}}</td> -->
+                <td>{{$store->name_en}}</td>
+                <td>{{$store->user->name}}</td>
                 <td>@if ($store->logo)<img src="{{url($store->logo)}}" class="img-circle" width="50px" height="50px">@endif</td>
                 <td>{{$store->category->name_en}}</td>
                 <td>{{round($store->ratings_avg_rating, 2)}}</td>
@@ -142,6 +145,9 @@
                     <!-- /.modal-dialog -->
                   </div> --}}
                   <!-- /.modal -->
+               
+                  <a href="{{route('admin.stores.branches',$store->id)}}" class="btn btn-success">Branches</a>
+                  <a href="{{route('admin.stores.departments',$store->id)}}" class="btn btn-secondary">Departments</a>
                   <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modal-delete{{$store->id}}">
                     Delete
                   </button>
@@ -171,9 +177,7 @@
                     </div>
                     <!-- /.modal-dialog -->
                   </div>
-                  <!-- <a href="{{route('admin.stores.branches',$store->id)}}" class="btn btn-success">Branches</a>
-                  <a href="{{route('admin.stores.departments',$store->id)}}" class="btn btn-secondary">Departments</a>
-                  <a href="{{route('admin.stores.details',$store->id)}}" class="btn btn-primary">Details</a> -->
+                  <!-- <a href="{{route('admin.stores.details',$store->id)}}" class="btn btn-primary">Details</a> -->
                   <!-- /.modal -->
                 </td>
               </tr>
